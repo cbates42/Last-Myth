@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -11,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private float maxSpeed = 2;
 
     [SerializeField]
-    private float jumpForce = 5;
+    private float jumpForce = 25;
 
 
     private new Rigidbody rigidbody;
@@ -61,11 +62,20 @@ public class PlayerController : MonoBehaviour
 
     
     private void Jump()
-    { 
-       if(!isJumping)
+    {
+        if (isJumping == false)
         {
-            rigidbody.AddForce(0, jumpForce, 0);
+            isJumping = true;
+            rigidbody.velocity = new Vector3(0, jumpForce, 0);
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Ground")
+        {
+            isJumping = false;
+        }
     }
 }
