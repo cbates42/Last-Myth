@@ -14,12 +14,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float jumpForce = 25;
 
+    [SerializeField]
+    private float attackTime = 0.5f;
+
 
     private new Rigidbody rigidbody;
     private Vector2 input;
     private new Collider collider;
     private bool isJumping;
-    private bool hoverHold;
+    private bool attacking;
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +61,9 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            //TODO: Implement ability to attack (destroy specific gameobjects when colliding while it's active)
+         // Temporarily calls Attack method(destroy specific gameobjects when colliding while it's active)
+            Invoke("Attack", attackTime);
+            attacking = false;
         }
 
 
@@ -80,11 +85,15 @@ public class PlayerController : MonoBehaviour
     {
         // Sets isJumping to true, and makes player gameobject jump.
             isJumping = true;
-            rigidbody.velocity = new Vector3(0, jumpForce, 0);
+        // rigidbody.velocity = new Vector3(0, jumpForce, 0);
+        rigidbody.AddForce(0, jumpForce, 0, ForceMode.Impulse);
     }
 
     private void Attack()
     {
+        Debug.Log("Attacking");
+        attacking = true;
+
 
     }
 
@@ -97,5 +106,19 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
             Debug.Log("On the ground");
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+       if(other.gameObject.tag == "Enemy")
+        {
+            if (attacking)
+            {
+                Destroy(other.gameObject);
+                Debug.Log("Destroyed");
+            }
+        }
+
+
     }
 }
