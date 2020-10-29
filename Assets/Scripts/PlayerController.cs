@@ -52,15 +52,14 @@ public class PlayerController : MonoBehaviour
                 Jump();
             }
 
-            if (isJumping)
-            {
-                hoverHold = true;
-                Hover();
-            }
+         
                 
         }
 
-
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            //TODO: Implement ability to attack (destroy specific gameobjects when colliding while it's active)
+        }
 
 
     }
@@ -84,16 +83,11 @@ public class PlayerController : MonoBehaviour
             rigidbody.velocity = new Vector3(0, jumpForce, 0);
     }
 
-    private void Hover()
-    {    
-        //TODO: Code in a way for the player to hover.
-           while(hoverHold)
-            {
-            rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-            }
-      
+    private void Attack()
+    {
 
     }
+
 
     // On collision with the ground or any platforms, player will regain ability to jump.
     private void OnCollisionEnter(Collision collision)
