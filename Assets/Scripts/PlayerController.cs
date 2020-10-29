@@ -5,15 +5,19 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // Force of acceleration
     [SerializeField]
     private float accelerationForce = 10;
 
+    // Max speed
     [SerializeField]
     private float maxSpeed = 2;
 
+    // Jump height
     [SerializeField]
     private float jumpForce = 25;
 
+    //How long an attack stays active for
     [SerializeField]
     private float attackTime = 0.5f;
 
@@ -27,6 +31,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Grants access to the rigidbody and collider of attached gameobject
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
     }
@@ -40,8 +45,10 @@ public class PlayerController : MonoBehaviour
         cameraFlattenedForward.y = 0;
         var cameraRotation = Quaternion.LookRotation(cameraFlattenedForward);
 
+        //Rotate input direction to be relative to the camera
         Vector3 cameraRelativeInputDirection = cameraRotation * InputDirection;
 
+        //If speed isn't at max, continue to accelerate
         if (rigidbody.velocity.magnitude < maxSpeed)
         {
             rigidbody.AddForce(cameraRelativeInputDirection * accelerationForce, ForceMode.Acceleration);
@@ -63,7 +70,7 @@ public class PlayerController : MonoBehaviour
         {
          // Temporarily calls Attack method(destroy specific gameobjects when colliding while it's active)
             Invoke("Attack", attackTime);
-            attacking = false;
+         
         }
 
 
@@ -91,6 +98,7 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
+        //Active attack
         Debug.Log("Attacking");
         attacking = true;
 
@@ -110,10 +118,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //Upon collision, 
        if(other.gameObject.tag == "Enemy")
-        {
+        { //if colliding entity has Enemy tag,
             if (attacking)
-            {
+            { //and if player is attacking (attacking is true), destroy that gameObject and log it in console.
                 Destroy(other.gameObject);
                 Debug.Log("Destroyed");
             }
