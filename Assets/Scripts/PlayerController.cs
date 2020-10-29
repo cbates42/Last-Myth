@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 input;
     private new Collider collider;
     private bool isJumping;
+    private bool hoverHold;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Sets inputs
         Vector3 InputDirection = new Vector3(input.x, 0, input.y);
 
         Vector3 cameraFlattenedForward = Camera.main.transform.forward;
@@ -42,10 +44,23 @@ public class PlayerController : MonoBehaviour
             rigidbody.AddForce(cameraRelativeInputDirection * accelerationForce, ForceMode.Acceleration);
         }
 
+        //If space is pressed, and player isn't in the air, player will jump.
         if (Input.GetKey(KeyCode.Space))
         {
-            Jump();
+            if (!isJumping)
+            {
+                Jump();
+            }
+
+            if (isJumping)
+            {
+                hoverHold = true;
+                Hover();
+            }
+                
         }
+
+
 
 
     }
@@ -54,6 +69,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Sets inputs to the Horizontal and Vertical Axis
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
 
@@ -63,19 +79,29 @@ public class PlayerController : MonoBehaviour
     
     private void Jump()
     {
-        if (isJumping == false)
-        {
+        // Sets isJumping to true, and makes player gameobject jump.
             isJumping = true;
             rigidbody.velocity = new Vector3(0, jumpForce, 0);
-        }
+    }
+
+    private void Hover()
+    {    
+        //TODO: Code in a way for the player to hover.
+           while(hoverHold)
+            {
+            rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+            }
+      
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    // On collision with the ground or any platforms, player will regain ability to jump.
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground")
         {
             isJumping = false;
+            Debug.Log("On the ground");
         }
     }
 }
