@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 input;
     private new Collider collider;
     private bool isJumping;
-    private bool attacking;
+    private bool isAttacking;
 
     [SerializeField]
     private GameObject weaponPrefab;
@@ -84,9 +84,10 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-
-            Attack();
-
+            if (!isAttacking)
+            {
+                Attack();
+            }
         }
 
 
@@ -103,11 +104,18 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
+
         Instantiate(weaponPrefab, this.transform);
-       
+        isAttacking = true;
+        Invoke("DestroyWeapon", 0.3f);
         
     }
- 
+
+    private void DestroyWeapon()
+    {
+        Destroy(GameObject.FindGameObjectWithTag("Attack"));
+        isAttacking = false;
+    }
 
     // On collision with the ground or any platforms, player will regain ability to jump.
     private void OnCollisionEnter(Collision collision)
@@ -117,20 +125,5 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
             Debug.Log("On the ground");
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //Upon collision, 
-       if(other.gameObject.tag == "Enemy")
-        { //if colliding entity has Enemy tag,
-            if (attacking)
-            { //and if player is attacking (attacking is true), destroy that gameObject and log it in console.
-                Destroy(other.gameObject);
-                Debug.Log("Destroyed");
-            }
-        }
-
-
     }
 }
