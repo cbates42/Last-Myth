@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -8,16 +9,19 @@ public class Enemy : MonoBehaviour
     private Transform playerLocation;
     [SerializeField]
     private float speed;
+
+    private RaycastHit hit;
+
     // Start is called before the first frame update
     void Start()
     {
-    
+
     }
 
     // Update is called once per frame
     void Update()
     {
-            
+
     }
 
     private void FixedUpdate()
@@ -36,4 +40,16 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    void FixYPos()
+    {
+        if ((Physics.Raycast(transform.position, -Vector3.up, out hit, 10f)))
+        {
+            if (hit.distance > 0.3f)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y - hit.distance, transform.position.z);
+            }
+        }
+
+
+    }
 }

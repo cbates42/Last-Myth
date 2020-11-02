@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private new Collider collider;
     private bool isJumping;
     private bool attacking;
+    private bool hoverHold;
 
     // Start is called before the first frame update
     void Start()
@@ -54,24 +55,7 @@ public class PlayerController : MonoBehaviour
             rigidbody.AddForce(cameraRelativeInputDirection * accelerationForce, ForceMode.Acceleration);
         }
 
-        //If space is pressed, and player isn't in the air, player will jump.
-        if (Input.GetKey(KeyCode.Space))
-        {
-            if (!isJumping)
-            {
-                Jump();
-            }
-
-         
-                
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-         // Temporarily calls Attack method(destroy specific gameobjects when colliding while it's active)
-            Invoke("Attack", attackTime);
-         
-        }
+       
 
 
     }
@@ -84,7 +68,29 @@ public class PlayerController : MonoBehaviour
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
 
-       
+        //If space is pressed, and player isn't in the air, player will jump.
+        if (Input.GetKey(KeyCode.Space))
+        {
+            if (!isJumping)
+            {
+                Jump();
+            }
+
+            if (isJumping)
+            {
+                rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+            }
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            // Temporarily calls Attack method(destroy specific gameobjects when colliding while it's active)
+            Invoke("Attack", attackTime);
+
+        }
+
+
     }
 
     
@@ -105,6 +111,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void Hover()
+    {
+
+    }    
 
     // On collision with the ground or any platforms, player will regain ability to jump.
     private void OnCollisionEnter(Collision collision)
