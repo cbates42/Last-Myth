@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
         playerLocation = GameObject.FindWithTag("Player").transform;
         float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, playerLocation.position, speed);
-        FixYPos();
+        FixPos();
       
     }
 
@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void FixYPos()
+    void FixPos()
     {
         if ((Physics.Raycast(transform.position, -Vector3.up, out hit, 10f)))
         {
