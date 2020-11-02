@@ -28,7 +28,9 @@ public class PlayerController : MonoBehaviour
     private new Collider collider;
     private bool isJumping;
     private bool isAttacking;
+    
 
+    //Weapon prefab object
     [SerializeField]
     private GameObject weaponPrefab;
 
@@ -82,6 +84,7 @@ public class PlayerController : MonoBehaviour
 
         }
 
+        //If Z is pressed, and player isn't attacking, player will attack.
         if (Input.GetKeyDown(KeyCode.Z))
         {
             if (!isAttacking)
@@ -104,15 +107,17 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-
+        //Instantiates the weapon prefab on the object the script is attached to.
         Instantiate(weaponPrefab, this.transform);
         isAttacking = true;
+        //Runs DestroyWeapon after 0.3 seconds.
         Invoke("DestroyWeapon", 0.3f);
         
     }
 
     private void DestroyWeapon()
     {
+        //Destroys the weapon prefab, enables player to attack again.
         Destroy(GameObject.FindGameObjectWithTag("Attack"));
         isAttacking = false;
     }

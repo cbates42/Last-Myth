@@ -10,7 +10,7 @@ public class Gameover : MonoBehaviour
 
 
     private void OnTriggerEnter(Collider other)
-    {
+    {   //When player enters, game over set to true.
             if (other.CompareTag("Player"))
             {
             gameOver = true;
@@ -22,7 +22,7 @@ public class Gameover : MonoBehaviour
     public void GameOver()
     {
         if(gameOver)
-        {
+        { //Placeholder, will be replaced with a UI gameover.
             Debug.Log("Game over!");
         }
     }    
