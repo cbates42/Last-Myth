@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour
         playerLocation = GameObject.FindWithTag("Player").transform;
         float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, playerLocation.position, speed);
+       
         FixPos();
       
     }
@@ -54,7 +55,6 @@ public class Enemy : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, transform.position.y - hit.distance, transform.position.z);
             }
         }
-
 
     }
 }
