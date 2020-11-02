@@ -29,6 +29,10 @@ public class PlayerController : MonoBehaviour
     private bool attacking;
     private bool hoverHold;
 
+    [SerializeField]
+    private GameObject weaponPrefab;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -80,8 +84,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            // Temporarily calls Attack method(destroy specific gameobjects when colliding while it's active)
-            Invoke("Attack", attackTime);
+            Attack();
 
         }
 
@@ -99,17 +102,12 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        //Active attack
-        Debug.Log("Attacking");
-        attacking = true;
+        Instantiate(weaponPrefab);
+      
 
 
     }
-
-    private void Hover()
-    {
-
-    }    
+ 
 
     // On collision with the ground or any platforms, player will regain ability to jump.
     private void OnCollisionEnter(Collision collision)
