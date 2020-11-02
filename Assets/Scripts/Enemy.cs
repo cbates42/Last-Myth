@@ -15,16 +15,14 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float yDistance;
 
-    // Start is called before the first frame update
-    void Start()
+    private bool gameOver = false;
+
+    public Gameover GameOver;
+
+    private void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        GameObject gover = GameObject.FindGameObjectWithTag("Gameover");
+        GameOver = gover.GetComponent<Gameover>();
     }
 
     private void FixedUpdate()
@@ -37,14 +35,6 @@ public class Enemy : MonoBehaviour
       
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            Application.Quit();
-            Debug.Log("Game Over");
-        }
-    }
 
     void FixPos()
     {
@@ -57,4 +47,15 @@ public class Enemy : MonoBehaviour
         }
 
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            GameOver.gameOver = true;
+            GameOver.GameOver();
+        }
+    }
+
+
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Gameover : MonoBehaviour
 {
 
-    private bool gameOver = false;
+    public bool gameOver = false;
 
 
 
@@ -19,7 +19,7 @@ public class Gameover : MonoBehaviour
         
     }
 
-    private void GameOver()
+    public void GameOver()
     {
         if(gameOver)
         {
