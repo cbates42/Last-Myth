@@ -76,11 +76,6 @@ public class PlayerController : MonoBehaviour
                 Jump();
             }
 
-            if (isJumping)
-            {
-                rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-            }
-
         }
 
         if (Input.GetKeyDown(KeyCode.Z))

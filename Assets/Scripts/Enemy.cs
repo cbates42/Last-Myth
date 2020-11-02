@@ -12,6 +12,9 @@ public class Enemy : MonoBehaviour
 
     private RaycastHit hit;
 
+    [SerializeField]
+    private float yDistance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,8 @@ public class Enemy : MonoBehaviour
         playerLocation = GameObject.FindWithTag("Player").transform;
         float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, playerLocation.position, speed);
+        FixYPos();
+      
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,7 +49,7 @@ public class Enemy : MonoBehaviour
     {
         if ((Physics.Raycast(transform.position, -Vector3.up, out hit, 10f)))
         {
-            if (hit.distance > 0.3f)
+            if (hit.distance > yDistance)
             {
                 transform.position = new Vector3(transform.position.x, transform.position.y - hit.distance, transform.position.z);
             }
