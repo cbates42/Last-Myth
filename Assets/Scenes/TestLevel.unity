@@ -533,7 +533,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361537519}
-  m_LocalRotation: {x: 0.1329374, y: -0.0564447, z: 0.007583338, w: 0.9894868}
+  m_LocalRotation: {x: 0.1329374, y: -0.056444626, z: 0.007583328, w: 0.9894868}
   m_LocalPosition: {x: 11.976844, y: 4.69, z: 4.465723}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -750,7 +750,8 @@ MonoBehaviour:
   maxSpeed: 5
   jumpForce: 2
   attackTime: 0.8
-  weaponPrefab: {fileID: 0}
+  weaponPrefab: {fileID: 4037098354674999860, guid: 91c0ad2c78cd8644b9f50c83d0d31344,
+    type: 3}
 --- !u!1 &558845414
 GameObject:
   m_ObjectHideFlags: 3
@@ -1485,7 +1486,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 844925856}
-  m_LocalRotation: {x: 0.13293742, y: -0.056444675, z: 0.0075833052, w: 0.9894869}
+  m_LocalRotation: {x: 0.13293742, y: -0.056444637, z: 0.0075833, w: 0.9894869}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2824,7 +2825,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 7840105881976599053, guid: 8658f552c9791d64daa131aeddb8d0c5,
     type: 3}
-  startDelay: 0
+  startDelay: 0.5
   repeatRate: 5
 --- !u!4 &1687901293
 Transform:
@@ -3045,7 +3046,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16832
+  m_Name: pb_Mesh17204
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

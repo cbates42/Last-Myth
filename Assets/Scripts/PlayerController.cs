@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,13 +22,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float attackTime = 0.5f;
 
-
+  
     private new Rigidbody rigidbody;
     private Vector2 input;
     private new Collider collider;
     private bool isJumping;
     private bool attacking;
-    private bool hoverHold;
 
     [SerializeField]
     private GameObject weaponPrefab;
@@ -84,6 +84,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
+
             Attack();
 
         }
@@ -102,10 +103,9 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        Instantiate(weaponPrefab);
-      
-
-
+        Instantiate(weaponPrefab, this.transform);
+       
+        
     }
  
 
