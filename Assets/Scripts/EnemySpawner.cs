@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         //Spawns an enemy every repeatRate seconds.
-        if (this.tag == "SINGLE")
+        if (this.tag == "Single")
         {
             spawnEnemy();
         }
