@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Gameover : MonoBehaviour
 {
@@ -22,8 +23,9 @@ public class Gameover : MonoBehaviour
     public void GameOver()
     {
         if(gameOver)
-        { //Placeholder, will be replaced with a UI gameover.
+        { //Sends player to Gameover scene
             Debug.Log("Game over!");
+            SceneManager.LoadScene("GameOver");
         }
     }    
 }
