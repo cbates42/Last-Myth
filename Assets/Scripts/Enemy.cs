@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float speed;
 
-    private RaycastHit hit;
+   
 
     [SerializeField]
     private float yDistance;
@@ -42,6 +42,8 @@ public class Enemy : MonoBehaviour
 
     void FixPos()
     {
+        RaycastHit hit;
+
         //Object sends a ray downwards,
         if ((Physics.Raycast(transform.position, -Vector3.up, out hit, 10f)))
         {
